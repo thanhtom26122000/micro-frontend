@@ -1,47 +1,50 @@
-import { registerApplication, start } from 'single-spa';
+import { registerApplication, start } from "single-spa";
 
 // Load root framework for the header since it's always present
-import 'react';
-import 'react-dom';
+import "react";
+import "react-dom";
 
 // Load root css
-import './styles.css';
+import "./styles.css";
 
 const menuItems = [
-  {
-    path: '/',
-    label: 'Home'
-  },
-  {
-    path: '/posts',
-    label: 'Posts'
-  },
+    {
+        path: "/",
+        label: "Home",
+    },
+    {
+        path: "/posts",
+        label: "Posts",
+    },
+    {
+        path: "/posts-2",
+        label: "Posts 2",
+    },
 ];
 
 registerApplication(
-  'header',
-  // @ts-ignore
-  () => import('navigation'),
-  () => true,
-  { items: menuItems }
+    "header",
+    // @ts-ignore
+    () => import("navigation"),
+    () => true,
+    { items: menuItems }
 );
 
 registerApplication(
-  'home',
-  // @ts-ignore
-  () => {
-    import('./preload');
-    return import('./home');
-  },
-  (location) => location.pathname === '/',
+    "home",
+    // @ts-ignore
+    () => {
+        import("./preload");
+        return import("./home");
+    },
+    (location) => location.pathname === "/"
 );
 
 registerApplication(
-  'posts',
-  // @ts-ignore
-  () => import('posts'),
-  (location) => location.pathname === '/posts',
+    "posts",
+    // @ts-ignore
+    () => import("posts"),
+    (location) => location.pathname === "/posts"
 );
-
 
 start();
